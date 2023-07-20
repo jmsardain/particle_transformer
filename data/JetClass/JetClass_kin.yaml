@@ -5,13 +5,20 @@ selection:
 new_variables:
    ### [format] name: formula
    ### can use functions from `math`, `np` (numpy), and `awkward` in the expression
-   part_mask: ak.ones_like(part_energy)
-   part_pt: np.hypot(part_px, part_py)
-   part_pt_log: np.log(part_pt)
-   part_e_log: np.log(part_energy)
-   part_logptrel: np.log(part_pt/jet_pt)
-   part_logerel: np.log(part_energy/jet_energy)
-   part_deltaR: np.hypot(part_deta, part_dphi)
+   
+   #Mask pt < 0.1
+   part_mask: fjet_clus_pt<0.1
+   
+   ### Kinematic variables
+   part_px: fjet_clus_pt*np.cos(fjet_clus_phi)
+   part_py: fjet_clus_pt*np.sin(fjet_clus_phi)
+   part_pz: fjet_clus_pt*np.sinh(fjet_clus_eta)
+   part_pt: fjet_clus_pt
+   part_pt_log: np.log(fjet_clus_pt)
+   part_e_log: np.log(fjet_clus_E)
+   part_logptrel: np.log(fjet_clus_pt/jet_pt)
+   part_logerel: np.log(fjet_clus_E/jet_pt)
+   part_deltaR: np.hypot(fjet_clus_eta, fjet_clus_phi)
 
 preprocess:
   ### method: [manual, auto] - whether to use manually specified parameters for variable standardization
@@ -24,8 +31,8 @@ inputs:
       length: 128
       pad_mode: wrap
       vars: 
-         - [part_deta, null]
-         - [part_dphi, null]
+         - [fjet_clus_eta, null]
+         - [fjet_clus_phi, null]
    pf_features:
       length: 128
       pad_mode: wrap
@@ -42,8 +49,8 @@ inputs:
          - [part_logptrel, -4.7, 0.7]
          - [part_logerel, -4.7, 0.7]
          - [part_deltaR, 0.2, 4.0]
-         - [part_deta, null]
-         - [part_dphi, null]
+         - [fjet_clus_eta, null]
+         - [fjet_clus_phi, null]
    pf_vectors:
       length: 128
       pad_mode: wrap
@@ -51,7 +58,7 @@ inputs:
          - [part_px, null]
          - [part_py, null]
          - [part_pz, null]
-         - [part_energy, null]
+         - [fjet_clus_E, null]
    pf_mask:
       length: 128
       pad_mode: constant
