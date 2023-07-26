@@ -9,8 +9,8 @@ export PYTHONUNBUFFERED=true
 
 conda init bash
 conda activate weaver
-#export DATADIR_JetClass='/mnt/iusers01/fatpou01/phy01/j17668am/scratch/particle_transformer/ROOT_PREPARATION/'
-export DATADIR_JetClass='/mnt/iusers01/fatpou01/phy01/j17668am/scratch/particle_transformer/ROOT_PREPARATION/data_out/'
+export DATADIR_JetClass='/mnt/iusers01/fatpou01/phy01/j17668am/scratch/particle_transformer/ROOT_PREPARATION/'
+#export DATADIR_JetClass='/mnt/iusers01/fatpou01/phy01/j17668am/scratch/particle_transformer/ROOT_PREPARATION/data_out/'
 echo ${DATADIR_JetClass}
 
 export DDP_NGPUS=$NGPUS
