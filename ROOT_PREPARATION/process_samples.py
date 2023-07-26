@@ -38,9 +38,9 @@ def write(data, out_file_names, out_file, branches, output_length, num_jets_file
     
     #number of jets needed to fill the output file
     jets_needed = int(output_length - num_jets_file)
-    
+            
     #if space write all jets in batch
-    if jets_needed >= len(data["fjet_clus_pt"]):
+    if jets_needed > len(data["fjet_clus_pt"]):
         out_file["tree"].extend({branch: data[branch] for branch in branches.keys()})
         print("Writing",len(data["fjet_clus_pt"]),"Jets to:"+out_file_names[index])
         num_jets_file += len(data["fjet_clus_pt"])
@@ -68,19 +68,26 @@ def split_input_files(config):
     
     #Find the number of jets in each file
     for fn in filenames:
-        for _data in uproot.iterate(fn+config['tree'], filter_name = config["branches_to_use_in_preprocess"][0]):
-            jet_count_dict[fn]+=len(_data)
+        for _data in uproot.iterate(fn+config['tree'], filter_name = config["branches_to_use_in_preprocess"]):
+            _data = selection_cuts(_data,config["signal"]) #Apply selection cuts to avoid later problems with jets being cut
+            jet_count_dict[fn]+=len(_data[config["branches_to_use_in_preprocess"][0]])
+
     num_jets_in_samples = sum(jet_count_dict.values())
     
     if max_jets is None: max_jets = num_jets_in_samples #if None, take all jets
     
+    #ensure max_jets is smaller or equal than num_jets_in_sample
+    if max_jets > num_jets_in_samples:
+        print("\nWARNING: max_jets too high. Instead saving max number of jets in sample:",num_jets_in_samples,"\n")
+        max_jets = num_jets_in_samples
+        
     #Take fraction of jets determined by max_jets
     for key in jet_count_dict.keys():
         jet_count_dict[key] = int(jet_count_dict[key]*max_jets/num_jets_in_samples) #Round down
-    
     len_output = np.floor(max_jets/num_outputs)
+        
     print("Processing into",num_outputs,"output files: Each with length",len_output,"Jets")
-    print("TOTAL JETS:",num_outputs*len_output) #Number of jets may have been rounded down
+    print("TOTAL JETS:",int(num_outputs*len_output)) #Number of jets may have been rounded down
     
     return jet_count_dict, len_output
 
@@ -95,11 +102,12 @@ def skim(in_file_name, out_file_names, signal, branches_to_use_in_preprocess, br
         input_data["label_sig"]=signal
         input_data["jet_pt"] = np.sum(input_data["fjet_clus_pt"],axis=-1)
         input_data["jet_energy"] = np.sum(input_data["fjet_clus_E"],axis=-1)
+        input_data["weight"]=1.0 #SET WEIGHTS TO 1, USE MATCH_WEIGHTS.PY TO CHANGE THIS LATER
 
         #Preprocess and selection cuts
         input_data = preprocess(input_data,branches_to_keep)
-        input_data = selection_cuts(input_data,signal)
-        
+        input_data = selection_cuts(input_data,signal) #CUTTING AWAY EVENTS MAY CAUSE PROBLEMS IF MAX_JETS IS TOO HIGH
+
         #ADD EVENTS UNTIL MAX_JETS PASSED
         if not (max_jets is None):
             new_num_jets = num_jets_total+len(input_data["fjet_clus_pt"])
@@ -107,9 +115,9 @@ def skim(in_file_name, out_file_names, signal, branches_to_use_in_preprocess, br
                 num_jets_total = new_num_jets
             else:
                 for branch in branches_to_keep:
-                    input_data[branch] = input_data[branch][:max_jets-num_jets_total+1]
+                    input_data[branch] = input_data[branch][:max_jets-num_jets_total]
                 num_jets_total=max_jets
-
+        
         for branch in branches_to_keep:
             if "_clus_" in branch:
                 #PAD and CLIP
@@ -144,6 +152,7 @@ def run(config):
     for key in jet_count_dict.keys():
         print("Loading file:",key)
         out_file,out_file_index, num_jets_file = skim(key+config["tree"], out_file_names, config["signal"], config["branches_to_use_in_preprocess"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key], out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file)
+
     out_file.close()
     print("\nNOTE: WEIGHTS HAVE BEEN ALL SET TO 1. USE MATCH_WEIGHTS.PY TO MATCH WEIGHTS OF SIG AND BKG USING PT.")
         

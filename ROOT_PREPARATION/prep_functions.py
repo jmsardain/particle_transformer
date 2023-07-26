@@ -1,4 +1,5 @@
 import numpy as np
+import awkward as ak
     
 def common_cuts(batch):
     """ common_cuts - This function will take in a batch of data (almost always as loaded)
@@ -52,7 +53,7 @@ def signal_cuts(batch):
 
     return total_cuts
 
-def simple_angular(jets, sort_indeces, max_constits=200, **kwargs):
+def simple_angular(jets, sort_indeces, **kwargs):
     """ simple_angular - This function will perform a simple preprocessing
     on the angular constituent information. It is the same preprocessing used
     in 1902.09914.
@@ -81,17 +82,17 @@ def simple_angular(jets, sort_indeces, max_constits=200, **kwargs):
     # Find the eta/phi coordinates of hardest constituent in each jet, going to
     # need some fancy indexing
     ax_index = np.arange(0, len(eta), 1)
+
     first_eta = eta[ax_index, sort_indeces[:,0]]
     first_phi = phi[ax_index, sort_indeces[:,0]]
 
     # Now center
     eta_center = eta - first_eta[:,np.newaxis]
     phi_center = phi - first_phi[:,np.newaxis]
-
+    
     # Fix discontinuity in phi at +-pi
     phi_center = np.where(phi_center > np.pi, phi_center - 2*np.pi, phi_center)
     phi_center = np.where(phi_center < -np.pi, phi_center + 2*np.pi, phi_center)
-
     # 2. Rotate such that 2nd hardest constituent sits on negative phi axis
     # Screen indeces for any jets with 1 or 2 constituents (ask about these)
     sort_indeces = ak.fill_none(ak.pad_none(sort_indeces,3, axis=1),0,axis=1)
@@ -108,4 +109,6 @@ def simple_angular(jets, sort_indeces, max_constits=200, **kwargs):
     eta_flip = eta_rot * parity[:,np.newaxis]
 
     # Finished preprocessing. Return results
-    return eta_flip, phi_rot
+    jets['fjet_clus_deltaeta']=eta_flip
+    jets['fjet_clus_deltaphi']=phi_rot
+    return jets

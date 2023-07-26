@@ -55,12 +55,12 @@ fi
 # currently only Pythia
 SAMPLE_TYPE=Pythia
 
-$CMD --data-train ${DATADIR}/sig_1.root ${DATADIR}/bkg_1.root\
+$CMD --data-train ${DATADIR}sig_*.root ${DATADIR}bkg_*.root\
     --train-val-split 0.9\
     --data-config data/JetClass/JetClass_${FEATURE_TYPE}.yaml --network-config $modelopts \
     --model-prefix training/JetClass/${SAMPLE_TYPE}/${FEATURE_TYPE}/${model}/{auto}${suffix}/net \
     $dataopts $batchopts \
-    --num-epochs $epochs --gpus 0 \
+    --num-epochs $epochs --gpus 0 --batch-size 1\
     --optimizer ranger --log logs/JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}_{auto}${suffix}.log --predict-output pred.root \
     --tensorboard JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}${suffix} \
     "${@:3}"

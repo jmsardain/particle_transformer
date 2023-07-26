@@ -7,7 +7,8 @@ new_variables:
    ### can use functions from `math`, `np` (numpy), and `awkward` in the expression
    
    #Mask pt < 0.1
-   part_mask: fjet_clus_pt<0.1
+   #fjet_clus_pt!=-999
+   #fjet_clus_pt>0.1
    
    ### Kinematic variables
    part_px: fjet_clus_pt*np.cos(fjet_clus_phi)
@@ -16,9 +17,13 @@ new_variables:
    part_pt: fjet_clus_pt
    part_pt_log: np.log(fjet_clus_pt)
    part_e_log: np.log(fjet_clus_E)
-   part_logptrel: np.log(fjet_clus_pt/jet_pt)
-   part_logerel: np.log(fjet_clus_E/jet_pt)
-   part_deltaR: np.hypot(fjet_clus_eta, fjet_clus_phi)
+   part_logptrel: np.log(fjet_clus_pt/jet_pt[:,np.newaxis])
+   part_logerel: np.log(fjet_clus_E/jet_energy[:,np.newaxis])
+   ###part_logptrel: np.log(fjet_clus_pt)
+   ###part_logerel: np.log(fjet_clus_E)
+   part_deltaR: np.hypot(fjet_clus_deltaeta, fjet_clus_deltaphi)
+
+   part_mask: part_logerel>-20
 
 preprocess:
   ### method: [manual, auto] - whether to use manually specified parameters for variable standardization
@@ -28,13 +33,13 @@ preprocess:
 
 inputs:
    pf_points:
-      length: 128
+      length: 80
       pad_mode: wrap
       vars: 
-         - [fjet_clus_eta, null]
-         - [fjet_clus_phi, null]
+         - [fjet_clus_deltaeta, null]
+         - [fjet_clus_deltaphi, null]
    pf_features:
-      length: 128
+      length: 80
       pad_mode: wrap
       vars: 
       ### [format 1]: var_name (no transformation)
@@ -44,15 +49,16 @@ inputs:
       ###              clip_min(optional, default=-5), 
       ###              clip_max(optional, default=5), 
       ###              pad_value(optional, default=0)]
-         - [part_pt_log, 1.7, 0.7]
-         - [part_e_log, 2.0, 0.7]
-         - [part_logptrel, -4.7, 0.7]
-         - [part_logerel, -4.7, 0.7]
-         - [part_deltaR, 0.2, 4.0]
-         - [fjet_clus_eta, null]
-         - [fjet_clus_phi, null]
+      
+         - [part_pt_log, null]
+         - [part_e_log, null]
+         - [part_logptrel, null]
+         - [part_logerel, null]
+         - [part_deltaR, null]
+         - [fjet_clus_deltaeta, null]
+         - [fjet_clus_deltaphi, null]
    pf_vectors:
-      length: 128
+      length: 80
       pad_mode: wrap
       vars: 
          - [part_px, null]
@@ -60,7 +66,7 @@ inputs:
          - [part_pz, null]
          - [fjet_clus_E, null]
    pf_mask:
-      length: 128
+      length: 80
       pad_mode: constant
       vars: 
          - [part_mask, null]
