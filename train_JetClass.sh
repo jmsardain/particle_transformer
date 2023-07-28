@@ -58,10 +58,11 @@ SAMPLE_TYPE=Pythia
 $CMD --data-train ${DATADIR}train.root\
     --data-test ${DATADIR}test.root \
     --train-val-split 0.9\
+    --no-load_observers_during_training --no-data_config_print \
     --data-config data/JetClass/JetClass_${FEATURE_TYPE}.yaml --network-config $modelopts \
     --model-prefix training/JetClass/${SAMPLE_TYPE}/${FEATURE_TYPE}/${model}/{auto}${suffix}/net \
     $dataopts $batchopts \
-    --num-epochs $epochs --gpus 0 --batch-size 1\
+    --num-epochs $epochs --gpus 0 --batch-size 500 \
     --optimizer ranger --log logs/JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}_{auto}${suffix}.log --predict-output pred.root \
     --tensorboard JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}${suffix} \
     "${@:3}"

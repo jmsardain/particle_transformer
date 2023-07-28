@@ -58,4 +58,4 @@ def get_model(data_config, **kwargs):
 
 
 def get_loss(data_config, **kwargs):
-    return torch.nn.CrossEntropyLoss()
+    return torch.nn.CrossEntropyLoss(reduction='none')

@@ -23,7 +23,7 @@ new_variables:
    ###part_logerel: np.log(fjet_clus_E)
    part_deltaR: np.hypot(fjet_clus_deltaeta, fjet_clus_deltaphi)
 
-   part_mask: part_logerel>-20
+   part_mask: fjet_clus_pt>0.1
 
 preprocess:
   ### method: [manual, auto] - whether to use manually specified parameters for variable standardization
@@ -75,14 +75,16 @@ labels:
    ### type can be `simple`, `custom`
    ### [option 1] use `simple` for binary/multi-class classification, then `value` is a list of 0-1 labels
    type: simple
-   value: [label_QCD, label_sig]
+   value: [label_QCD,label_sig]
    ### [option 2] otherwise use `custom` to define the label, then `value` is a map
    # type: custom
    # value: 
    #    truth_label: label.argmax(1)
 
 observers:
-   #- jet_pt
+###VARIABLE MUST BE CALLED 'weight' TO BE USED IN LOSS, ALSO MUST SET (REDUCTION = 'none')
+###IN LOSS FUCTION AND USE FLAG --load_observers_during_training True IN train_JetClass.sh
+   - weight
    #- jet_eta
    #- jet_phi
    #- jet_energy
