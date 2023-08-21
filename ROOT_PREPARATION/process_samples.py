@@ -30,6 +30,7 @@ def preprocess(jets,branches):
         
     return jets
 
+'''
 def write(data, out_file_names, out_file, branches, output_length, num_jets_file,index=0):
     # Create out_file if doesn't already exist
     if out_file is None:
@@ -58,6 +59,7 @@ def write(data, out_file_names, out_file, branches, output_length, num_jets_file
             #call function recursively to save to each chunk without overflowing next output file
             out_file, index,num_jets_file = write(data, out_file_names, None, branches, output_length, num_jets_file,index)
     return out_file,index,num_jets_file
+'''
 
 def split_input_files(config):
     max_jets = config["max_jets"]
@@ -131,8 +133,21 @@ def skim(in_file_name, out_file_names, signal, branches_to_use_in_preprocess, br
             if not input_data[column].ndim > 2 and column in branches_to_keep:
                 branches[column] = ak.type(input_data[column])
                        
+        #Open Target Files
+        if out_file is None:
+            out_file = []
+            for fn in out_file_names:
+                out = uproot.recreate(fn)
+                out.mktree("tree", branches)    
+                out_file.append(out)
+        
         #Write Jets
-        out_file,out_file_index,num_jets_file = write(input_data, out_file_names, out_file, branches, output_length, num_jets_file,out_file_index)
+        branch_splits = {branch:np.array_split(np.array(input_data[branch]), len(out_file)) for branch in list(branches.keys())}
+        print("Writing",len(input_data["fjet_clus_pt"]),"Jets to target files...",end="")
+        for i in range(len(out_file)):
+            out_file[i]["tree"].extend({branch: branch_splits[branch][i] for branch in branches.keys()})
+        print("Done")
+        #out_file,out_file_index,num_jets_file = write(input_data, out_file_names, out_file, branches, output_length, num_jets_file,out_file_index)
             
         if num_jets_total == max_jets: break #If max jets from input file reached, stop uproot.iterate(...)
     return out_file, out_file_index, num_jets_file
@@ -153,7 +168,8 @@ def run(config):
         print("Loading file:",key)
         out_file,out_file_index, num_jets_file = skim(key+config["tree"], out_file_names, config["signal"], config["branches_to_use_in_preprocess"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key], out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file)
 
-    out_file.close()
+    for f in out_file:
+        f.close()
     print("\nNOTE: WEIGHTS HAVE BEEN ALL SET TO 1. USE MATCH_WEIGHTS.PY TO MATCH WEIGHTS OF SIG AND BKG USING PT.")
         
 
