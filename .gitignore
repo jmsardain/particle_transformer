@@ -34,6 +34,7 @@ logs/
 runs/
 ROOT_PREPARATION/ntuples/
 ROOT_PREPARATION/data_out/
+ROOT_PREPARATION/*.root
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -11,9 +11,9 @@ new_variables:
    #fjet_clus_pt>0.1
    
    ### Kinematic variables
-   part_px: fjet_clus_pt*np.cos(fjet_clus_phi)
-   part_py: fjet_clus_pt*np.sin(fjet_clus_phi)
-   part_pz: fjet_clus_pt*np.sinh(fjet_clus_eta)
+   part_px: fjet_clus_pt*np.cos(fjet_clus_deltaphi)
+   part_py: fjet_clus_pt*np.sin(fjet_clus_deltaphi)
+   part_pz: fjet_clus_pt*np.sinh(fjet_clus_deltaeta)
    part_pt: fjet_clus_pt
    part_pt_log: np.log(fjet_clus_pt)
    part_e_log: np.log(fjet_clus_E)
@@ -21,8 +21,8 @@ new_variables:
    part_logerel: np.log(fjet_clus_E/jet_energy[:,np.newaxis])
    ###part_logptrel: np.log(fjet_clus_pt)
    ###part_logerel: np.log(fjet_clus_E)
+   #part_deltaR: np.hypot(fjet_clus_eta, fjet_clus_phi)
    part_deltaR: np.hypot(fjet_clus_deltaeta, fjet_clus_deltaphi)
-
    part_mask: fjet_clus_pt>0.1
 
 preprocess:
@@ -75,7 +75,7 @@ labels:
    ### type can be `simple`, `custom`
    ### [option 1] use `simple` for binary/multi-class classification, then `value` is a list of 0-1 labels
    type: simple
-   value: [label_QCD,label_sig]
+   value: [label_QCD, label_sig]
    ### [option 2] otherwise use `custom` to define the label, then `value` is a map
    # type: custom
    # value: 
