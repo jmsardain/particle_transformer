@@ -11,9 +11,9 @@ new_variables:
    #fjet_clus_pt>0.1
    
    ### Kinematic variables
-   part_px: fjet_clus_pt*np.cos(fjet_clus_deltaphi)
-   part_py: fjet_clus_pt*np.sin(fjet_clus_deltaphi)
-   part_pz: fjet_clus_pt*np.sinh(fjet_clus_deltaeta)
+   part_px: fjet_clus_pt*np.cos(fjet_clus_phi)
+   part_py: fjet_clus_pt*np.sin(fjet_clus_phi)
+   part_pz: fjet_clus_pt*np.sinh(fjet_clus_eta)
    part_pt: fjet_clus_pt
    part_pt_log: np.log(fjet_clus_pt)
    part_e_log: np.log(fjet_clus_E)
@@ -23,13 +23,14 @@ new_variables:
    ###part_logerel: np.log(fjet_clus_E)
    #part_deltaR: np.hypot(fjet_clus_eta, fjet_clus_phi)
    part_deltaR: np.hypot(fjet_clus_deltaeta, fjet_clus_deltaphi)
-   part_mask: fjet_clus_pt>0.1
+   part_mask: part_pt_log>0.1
+   #part_mask: ak.ones_like(fjet_clus_pt)
 
 preprocess:
   ### method: [manual, auto] - whether to use manually specified parameters for variable standardization
   method: manual
   ### data_fraction: fraction of events to use when calculating the mean/scale for the standardization
-  data_fraction: 0.5
+  data_fraction: 1.0
 
 inputs:
    pf_points:
@@ -84,7 +85,7 @@ labels:
 observers:
 ###VARIABLE MUST BE CALLED 'weight' TO BE USED IN LOSS, ALSO MUST SET (REDUCTION = 'none')
 ###IN LOSS FUCTION AND USE FLAG --load_observers_during_training True IN train_JetClass.sh
-   - weight
+   #- weight
    #- jet_eta
    #- jet_phi
    #- jet_energy
@@ -96,3 +97,5 @@ observers:
    #- jet_tau4
 
 weights:
+    use_precomputed_weights: True
+    weight_branches: [weight]

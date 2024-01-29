@@ -29,6 +29,9 @@ model=$1
 if [[ "$model" == "ParT" ]]; then
     modelopts="networks/example_ParticleTransformer.py --use-amp"
     batchopts="--batch-size 512 --start-lr 1e-3"
+elif [[ "$model" == "PELICAN" ]]; then
+    modelopts="networks/example_Pelican.py"
+    batchopts="--batch-size 512 --start-lr 1e-2"
 elif [[ "$model" == "PN" ]]; then
     modelopts="networks/example_ParticleNet.py"
     batchopts="--batch-size 512 --start-lr 1e-2"
@@ -58,7 +61,6 @@ SAMPLE_TYPE=Pythia
 $CMD --data-train ${DATADIR}r22_p5548_train.root \
     --data-test ${DATADIR}r22_p5548_test.root \
     --train-val-split 0.9\
-    --no-load_observers_during_training --no-data_config_print \
     --data-config data/JetClass/JetClass_${FEATURE_TYPE}.yaml --network-config $modelopts \
     --model-prefix training/JetClass/${SAMPLE_TYPE}/${FEATURE_TYPE}/${model}/{auto}${suffix}/net \
     $dataopts $batchopts \
@@ -66,5 +68,7 @@ $CMD --data-train ${DATADIR}r22_p5548_train.root \
     --optimizer ranger --log logs/JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}_{auto}${suffix}.log --predict-output pred.root \
     --tensorboard JetClass_${SAMPLE_TYPE}_${FEATURE_TYPE}_${model}${suffix} \
     "${@:3}"
-    #
+    #--no-load_observers_during_training --no-data_config_print \
+    #--load-epoch 19 \
+#training/JetClass/Pythia/kin/ParT/20231027-135801_example_ParticleTransformer_ranger_lr0.001_batch512v1/net \
 

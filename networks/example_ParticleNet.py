@@ -13,6 +13,7 @@ class ParticleNetWrapper(torch.nn.Module):
         self.mod = ParticleNet(**kwargs)
 
     def forward(self, points, features, lorentz_vectors, mask):
+        print(lorentz_vectors)
         return self.mod(points, features, mask)
 
 
@@ -48,4 +49,4 @@ def get_model(data_config, **kwargs):
 
 
 def get_loss(data_config, **kwargs):
-    return torch.nn.CrossEntropyLoss()
+    return torch.nn.CrossEntropyLoss(reduction='none')
