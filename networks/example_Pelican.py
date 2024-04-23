@@ -29,7 +29,7 @@ class PELICANClassifierWrapper(torch.nn.Module):
             pdgid = torch.cat([2212 * torch.ones(s[0], 2, dtype=torch.long, device=l_v.device),
                                        torch.zeros(s[0], s[1], dtype=torch.long, device=l_v.device)], dim=1)
 
-        particle_mask = l_v[...,0] > 1.105171 #log(E) > 0.1
+        particle_mask = torch.square(l_v[...,1]) + torch.square(l_v[...,2]) > 1.105171**2 #log(pt) > 0.1
         edge_mask = particle_mask.unsqueeze(1) * particle_mask.unsqueeze(2)
         
         if self.cfg["add_beams"]:
@@ -68,7 +68,7 @@ def get_model(data_config, **kwargs):
                 add_beams=True,
                 read_pid=False,
                 batchnorm='b',
-                average_nobj=49,#CHECK THIS
+                average_nobj=51.83,#CHECK THIS
 #num_classes=2,activate_agg_in=False, activate_lin_in=True,activate_agg=False, activate_lin=True, activation='leakyrelu', add_beams=True, read_pid=False, config='s', config_out='s', average_nobj=49, factorize=False, masked=True,
                  #activate_agg_out=True, activate_lin_out=False, mlp_out=True,scale=1, irc_safe=False, dropout = False, drop_rate=0.1, drop_rate_out=0.1, batchnorm=None,
                  #weaver misc

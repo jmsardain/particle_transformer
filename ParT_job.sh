@@ -15,7 +15,7 @@ echo ${DATADIR_JetClass}
 
 export DDP_NGPUS=$NGPUS
 export COMMENT='v1'
-export NUM_EPOCHS=20
+export NUM_EPOCHS=50
 
 # Next build command to run python training script
 command="source train_JetClass.sh PELICAN kin"
