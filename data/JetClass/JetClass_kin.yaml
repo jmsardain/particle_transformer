@@ -22,6 +22,7 @@ new_variables:
    ###part_logptrel: np.log(fjet_clus_pt)
    ###part_logerel: np.log(fjet_clus_E)
    #part_deltaR: np.hypot(fjet_clus_eta, fjet_clus_phi)
+   test_w: fjet_testing_weight_pt
    part_deltaR: np.hypot(fjet_clus_deltaeta, fjet_clus_deltaphi)
    part_mask: part_pt_log>0.1
    #part_mask: ak.ones_like(fjet_clus_pt)
@@ -86,8 +87,8 @@ observers:
 ###VARIABLE MUST BE CALLED 'weight' TO BE USED IN LOSS, ALSO MUST SET (REDUCTION = 'none')
 ###IN LOSS FUCTION AND USE FLAG --load_observers_during_training True IN train_JetClass.sh
    #- weight
-   #- jet_eta
-   #- jet_phi
+   - test_w
+   - fjet_pt
    #- jet_energy
    #- jet_nparticles
    #- jet_sdmass
