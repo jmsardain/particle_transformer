@@ -23,7 +23,6 @@ def common_cuts(batch):
 
     # Take and of all cuts
     total_cuts = np.logical_and.reduce(cuts)
-
     return total_cuts
 
 
@@ -41,12 +40,15 @@ def signal_cuts(batch):
     # Assemble boolean arrays
     cuts = []
     cuts.append(common_cuts(batch))
-    cuts.append(abs(batch['fjet_truth_dRmatched_particle_flavor']) == 6)
-    cuts.append(abs(batch['fjet_truth_dRmatched_particle_dR']) < 0.75)
-    cuts.append(abs(batch['fjet_truthJet_dRmatched_particle_dR_top_W_matched']) < 0.75)
-    cuts.append(batch['fjet_ungroomed_truthJet_m'] / 1000. > 140.)
-    cuts.append(batch['fjet_truthJet_ungroomedParent_GhostBHadronsFinalCount'] >= 1)
-    cuts.append(batch['fjet_ungroomed_truthJet_Split23'] / 1000. > np.exp(3.3-6.98e-4*batch['fjet_ungroomed_truthJet_pt']/1000.))
+    if "R10TruthLabel_R22v1" in batch.fields:
+        cuts.append(abs(batch['R10TruthLabel_R22v1']) == 1)
+    else:
+        cuts.append(abs(batch['fjet_truth_dRmatched_particle_flavor']) == 6)
+        cuts.append(abs(batch['fjet_truth_dRmatched_particle_dR']) < 0.75)
+        cuts.append(abs(batch['fjet_truthJet_dRmatched_particle_dR_top_W_matched']) < 0.75)
+        cuts.append(batch['fjet_ungroomed_truthJet_m'] / 1000. > 140.)
+        cuts.append(batch['fjet_truthJet_ungroomedParent_GhostBHadronsFinalCount'] >= 1)
+        cuts.append(batch['fjet_ungroomed_truthJet_Split23'] / 1000. > np.exp(3.3-6.98e-4*batch['fjet_ungroomed_truthJet_pt']/1000.))
 
     # Take and of all cuts
     total_cuts = np.logical_and.reduce(cuts)
