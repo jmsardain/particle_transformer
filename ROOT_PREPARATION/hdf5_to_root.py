@@ -39,6 +39,7 @@ def define_jet_level_quantities(dset, data=None):
     else:
         data['fjet_truthJet_eta'] = np.array([i[26] for i in dset[:]]) 
     data['fjet_truthJet_pt'] = np.array([i[25] for i in dset[:]])
+    data['fjet_pt'] = np.array([i[0] for i in dset[:]])
     data['fjet_m'] = np.array([i[3] for i in dset[:]])
     data['R10TruthLabel_R22v1'] = np.array([i[38] for i in dset[:]])
     #####################    data['fjet_truth_dRmatched_particle_flavor'] = 
@@ -83,8 +84,9 @@ def split_input_files(config):
     with open(config["pickle_dict_file"], 'wb') as pickle_file:
         pickle.dump(jet_count_dict, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
 
-    num_jets_in_samples = np.sum([jet_count_dict[i] for i in jet_count_dict if i in filenames])
-    
+    jet_count_dict = {i:jet_count_dict[i] for i in jet_count_dict if i in filenames}
+    num_jets_in_samples = sum(jet_count_dict.values())
+
     if max_jets is None: max_jets = num_jets_in_samples #if None, take all jets
     
     #ensure max_jets is smaller or equal than num_jets_in_sample

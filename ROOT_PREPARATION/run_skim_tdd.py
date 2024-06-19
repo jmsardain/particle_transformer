@@ -6,13 +6,13 @@ config_sig={
     "pickle_dict_file":"/eos/user/a/almay/particle_transformer/ROOT_PREPARATION/metadata/jet_count_dict.pickle",
     "branches_to_keep" : ["fjet_clus_E","fjet_clus_pt","fjet_clus_phi",
                         "fjet_clus_eta","fjet_clus_deltaphi","fjet_clus_deltaeta",
-                        "label_QCD","label_sig","jet_pt","jet_energy","fjet_testing_weight_pt","weight"],
+                        "label_QCD","label_sig","fjet_pt","jet_pt","jet_energy","fjet_testing_weight_pt","weight"],
     "branches_to_use_in_preprocess" : ["fjet_clus_E","fjet_clus_pt","fjet_clus_phi","fjet_clus_eta", "fjet_testing_weight_pt",'fjet_truthJet_eta','fjet_truthJet_pt',
-                                    'fjet_numConstituents','fjet_m','fjet_truth_dRmatched_particle_flavor','fjet_truth_dRmatched_particle_dR',
+                                    'fjet_numConstituents',"fjet_pt",'fjet_m','fjet_truth_dRmatched_particle_flavor','fjet_truth_dRmatched_particle_dR',
                                     'fjet_truthJet_dRmatched_particle_dR_top_W_matched','fjet_ungroomed_truthJet_m','fjet_ungroomed_truthJet_Split23',
                                     'fjet_truthJet_ungroomedParent_GhostBHadronsFinalCount','fjet_ungroomed_truthJet_pt'],
     "max_constits" : 80,
-    "max_jets" : int(5e6),
+    "max_jets" : int(1e6),
     "num_outputs" : 1,
     "num_test" : 1, #num_train = num_outputs-num_test
         
@@ -36,7 +36,7 @@ config_bkg={
 
     "signal":False, 
     "out_file_tag":"bkg",
-    "in_file" :"/eos/atlas/atlascerngroupdisk/perf-jets/TAGGING/TDDh5/LargeR_June12_2024/user.rles.364703.e7142_s3681_r13144_p5548.tdd.FatJetsFlow_jetm2.24_2_31.24-04-17_JetTagging-1-g079895f_output.h5/user.rles.*._0000*.output.h5",
+    "in_file" :"/eos/atlas/atlascerngroupdisk/perf-jets/TAGGING/TDDh5/LargeR_June12_2024/user.rles.36471[0-2].e7142_s3681_r13144_p5548.tdd.FatJetsFlow_jetm2.24_2_31.24-04-17_JetTagging-1-g079895f_output.h5/user.rles.*._0000*.output.h5",
 }
 
 #h5_tr.run(config_sig)
