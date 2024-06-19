@@ -42,13 +42,6 @@ def define_jet_level_quantities(dset, data=None):
     data['fjet_pt'] = np.array([i[0] for i in dset[:]])
     data['fjet_m'] = np.array([i[3] for i in dset[:]])
     data['R10TruthLabel_R22v1'] = np.array([i[38] for i in dset[:]])
-    #####################    data['fjet_truth_dRmatched_particle_flavor'] = 
-    #####################    data['fjet_truth_dRmatched_particle_dR'] = 
-    #####################    data['fjet_truthJet_dRmatched_particle_dR_top_W_matched'] = 
-    #####################    data['fjet_ungroomed_truthJet_m'] = np.array([i[27] for i in dset['jets'][chunk[0]][:]])
-    #####################    data['fjet_ungroomed_truthJet_Split23'] = np.array([i[29] for i in dset['jets'][chunk[0]][:]])
-    #####################    data['fjet_truthJet_ungroomedParent_GhostBHadronsFinalCount'] = np.array([i[1] for i in dset['jets'][chunk[0]][:]])
-    #####################    data['fjet_ungroomed_truthJet_pt'] = np.array([i[] for i in dset['jets'][chunk[0]][:]])
     return data
 
 def split_input_files(config):
@@ -104,7 +97,7 @@ def split_input_files(config):
     
     return jet_count_dict, len_output
 
-def skim(in_file_name, out_file_names, signal, branches_to_use_in_preprocess, branches_to_keep, max_constits=80, max_jets=None, out_file=None, output_length=None,out_file_index=0,num_jets_file = 0,metadata=None):
+def skim(in_file_name, out_file_names, signal, branches_to_keep, max_constits=80, max_jets=None, out_file=None, output_length=None,out_file_index=0,num_jets_file = 0,metadata=None):
     num_jets_total = 0
     dset = h5py.File(in_file_name, 'r')
     # read
@@ -205,7 +198,7 @@ def run(config):
         except Exception:
             print("Key:",dsid,"not present in metadata file. Terminating!")
             raise SystemExit
-        out_file,out_file_index, num_jets_file = skim(key, out_file_names, config["signal"], config["branches_to_use_in_preprocess"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key], out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file,metadata=file_metadata)
+        out_file,out_file_index, num_jets_file = skim(key, out_file_names, config["signal"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key], out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file,metadata=file_metadata)
 
     for f in out_file:
         f.close()

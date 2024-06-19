@@ -30,37 +30,6 @@ def preprocess(jets,branches):
         
     return jets
 
-'''
-def write(data, out_file_names, out_file, branches, output_length, num_jets_file,index=0):
-    # Create out_file if doesn't already exist
-    if out_file is None:
-        out_file = uproot.recreate(out_file_names[index])
-        out_file.mktree("tree", branches)
-    
-    #number of jets needed to fill the output file
-    jets_needed = int(output_length - num_jets_file)
-            
-    #if space write all jets in batch
-    if jets_needed > len(data["fjet_clus_pt"]):
-        out_file["tree"].extend({branch: data[branch] for branch in branches.keys()})
-        print("Writing",len(data["fjet_clus_pt"]),"Jets to:"+out_file_names[index])
-        num_jets_file += len(data["fjet_clus_pt"])
-        
-    #if insufficient space in output file, write as many jets as possible, add subsequent jets to subsequent files
-    else:
-        out_file["tree"].extend({branch: data[branch][:jets_needed] for branch in branches.keys()})
-        print("Writing",jets_needed,"Jets to:"+out_file_names[index]+", and closing file.")
-
-        data = {branch: data[branch][jets_needed:] for branch in branches.keys()}
-        out_file.close()
-        index += 1
-        num_jets_file = 0
-        if index != len(out_file_names):
-            #call function recursively to save to each chunk without overflowing next output file
-            out_file, index,num_jets_file = write(data, out_file_names, None, branches, output_length, num_jets_file,index)
-    return out_file,index,num_jets_file
-'''
-
 def split_input_files(config):
     max_jets = config["max_jets"]
     num_outputs = config["num_outputs"]
