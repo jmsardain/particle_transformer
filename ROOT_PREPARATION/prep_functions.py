@@ -26,7 +26,7 @@ def common_cuts(batch):
     return total_cuts
 
 
-def signal_cuts(batch):
+def signal_cuts(batch, R22TruthLabelValues = []):
     """ signal_cuts - Calls the above function to produce the common cuts, but
     also adds a set of signal cuts which should be applied to the Z' sample.
 
@@ -41,7 +41,12 @@ def signal_cuts(batch):
     cuts = []
     cuts.append(common_cuts(batch))
     if "R10TruthLabel_R22v1" in batch.fields:
-        cuts.append(abs(batch['R10TruthLabel_R22v1']) == 1)
+        
+        truth_label_cuts=[]
+        for tru_label in R22TruthLabelValues:
+            truth_label_cuts.append(abs(batch['R10TruthLabel_R22v1']) == tru_label)
+
+        cuts.append(np.logical_or.reduce(truth_label_cuts))
     else:
         cuts.append(abs(batch['fjet_truth_dRmatched_particle_flavor']) == 6)
         cuts.append(abs(batch['fjet_truth_dRmatched_particle_dR']) < 0.75)

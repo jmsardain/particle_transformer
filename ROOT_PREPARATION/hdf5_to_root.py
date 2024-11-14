@@ -7,9 +7,9 @@ from prep_functions import common_cuts, signal_cuts, simple_angular
 import h5py
 import pickle
 
-def selection_cuts(batch, signal_bool):
+def selection_cuts(batch, signal_bool, R22TruthLabelValues = []):
     #Apply selections cuts depending on sig/bkg
-    cuts = signal_cuts(batch) if signal_bool else common_cuts(batch)
+    cuts = signal_cuts(batch,R22TruthLabelValues=R22TruthLabelValues) if signal_bool else common_cuts(batch)
     batch = {kw: batch[kw][cuts,...] for kw in batch.fields}
     return batch
     
@@ -48,7 +48,9 @@ def split_input_files(config):
     max_jets = config["max_jets"]
     num_outputs = config["num_outputs"]
     #get filenames
-    filenames = glob.glob(config["in_file"])
+    filenames = []
+    for i_f in config["in_file"]:
+        filenames = np.append(filenames,glob.glob(i_f))
     jet_count_dict = dict((fn,0) for fn in filenames)
     
     # Try Loading data from pickle
@@ -68,7 +70,7 @@ def split_input_files(config):
             for chunk in dset["flow"].iter_chunks():
                 _data = define_jet_level_quantities(dset["jets"][chunk[0]])
                 _data['fjet_numConstituents'] = ak.count_nonzero(dset['flow'][chunk][:]["valid"], axis=-1)
-                _data = selection_cuts(_data,config["signal"]) #Apply selection cuts to avoid later problems with jets being cut
+                _data = selection_cuts(_data,config["signal"],R22TruthLabelValues=config["R22TruthLabelValues"]) #Apply selection cuts to avoid later problems with jets being cut
                 jet_count_dict[fn]+=len(_data["fjet_m"])
             dset.close()
         else: print("Using Saved Jet Numbers for File:",fn)
@@ -97,7 +99,7 @@ def split_input_files(config):
     
     return jet_count_dict, len_output
 
-def skim(in_file_name, out_file_names, signal, branches_to_keep, max_constits=80, max_jets=None, out_file=None, output_length=None,out_file_index=0,num_jets_file = 0,metadata=None):
+def skim(in_file_name, out_file_names, signal, branches_to_keep, max_constits=80, max_jets=None, truth_labels=None, R22TruthLabelValues=[], out_file=None, output_length=None,out_file_index=0,num_jets_file = 0,metadata=None):
     num_jets_total = 0
     dset = h5py.File(in_file_name, 'r')
     # read
@@ -117,8 +119,12 @@ def skim(in_file_name, out_file_names, signal, branches_to_keep, max_constits=80
         input_data["valid"] = h5_data[:]["valid"]
         
         #Define other training quantities
-        input_data["label_QCD"]=not signal
-        input_data["label_sig"]=signal
+        if truth_labels is None:
+            input_data["label_QCD"]=not signal
+            input_data["label_sig"]=signal
+        else:
+            for lab in truth_labels.keys():
+                input_data[lab] = truth_labels[lab]
         input_data['fjet_numConstituents'] = ak.count_nonzero(input_data["valid"], axis=-1)
         input_data["jet_pt"] = ak.sum(ak.mask(input_data["fjet_clus_pt"],input_data['valid']==True),axis=-1)
         input_data["jet_energy"] = ak.sum(ak.mask(input_data["fjet_clus_E"],input_data['valid']==True),axis=-1)
@@ -131,7 +137,7 @@ def skim(in_file_name, out_file_names, signal, branches_to_keep, max_constits=80
         #Preprocess and selection cuts
         input_data = define_jet_level_quantities(dset["jets"][chunk[0]], data=input_data)   
         input_data = preprocess(input_data,branches_to_keep)
-        input_data = selection_cuts(input_data,signal) #CUTTING AWAY EVENTS MAY CAUSE PROBLEMS IF MAX_JETS IS TOO HIGH
+        input_data = selection_cuts(input_data,signal,R22TruthLabelValues=R22TruthLabelValues) #CUTTING AWAY EVENTS MAY CAUSE PROBLEMS IF MAX_JETS IS TOO HIGH
         #ADD EVENTS UNTIL MAX_JETS PASSED
         if not (max_jets is None):
             new_num_jets = num_jets_total+len(input_data["fjet_clus_pt"])
@@ -198,7 +204,8 @@ def run(config):
         except Exception:
             print("Key:",dsid,"not present in metadata file. Terminating!")
             raise SystemExit
-        out_file,out_file_index, num_jets_file = skim(key, out_file_names, config["signal"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key], out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file,metadata=file_metadata)
+        print(config["labels"])
+        out_file,out_file_index, num_jets_file = skim(key, out_file_names, config["signal"], config["branches_to_keep"], config["max_constits"], jet_count_dict[key],truth_labels=config["labels"], R22TruthLabelValues=config["R22TruthLabelValues"],out_file=out_file,output_length=output_length,out_file_index=out_file_index,num_jets_file=num_jets_file,metadata=file_metadata)
 
     for f in out_file:
         f.close()

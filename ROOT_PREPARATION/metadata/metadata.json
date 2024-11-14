@@ -1,0 +1,422 @@
+{
+  "364928": {
+    "XSection_pb": 0.70007, 
+    "nEvents": 40000, 
+    "genFilterEff": 0.0067365, 
+    "sumWeights": 6.323418349990506e-05, 
+    "kFactor": 1.0
+  }, 
+  "364929": {
+    "XSection_pb": 0.021245, 
+    "nEvents": 40000, 
+    "genFilterEff": 0.0081683, 
+    "sumWeights": 2.2840973303836498e-05, 
+    "kFactor": 1.0
+  }, 
+  "364677": {
+    "XSection_pb": 21406000000.0, 
+    "nEvents": 880000, 
+    "genFilterEff": 0.001441444, 
+    "sumWeights": 28200550.06151569, 
+    "kFactor": 1.0
+  }, 
+  "364678": {
+    "XSection_pb": 89315000.0, 
+    "nEvents": 770000, 
+    "genFilterEff": 0.005117554, 
+    "sumWeights": 21338902.682512164, 
+    "kFactor": 1.0
+  }, 
+  "364679": {
+    "XSection_pb": 9275100.0, 
+    "nEvents": 368000, 
+    "genFilterEff": 0.000565161, 
+    "sumWeights": 13275564.032448888, 
+    "kFactor": 1.0
+  }, 
+  "364680": {
+    "XSection_pb": 55101.0, 
+    "nEvents": 330000, 
+    "genFilterEff": 0.001497205, 
+    "sumWeights": 8481463.177011967, 
+    "kFactor": 1.0
+  }, 
+  "364681": {
+    "XSection_pb": 1631.5, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.024211, 
+    "sumWeights": 120000.91869974136, 
+    "kFactor": 1.0
+  }, 
+  "364682": {
+    "XSection_pb": 128.42000000000002, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.010823, 
+    "sumWeights": 120001.27094936371, 
+    "kFactor": 1.0
+  }, 
+  "364683": {
+    "XSection_pb": 27.212, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0036186, 
+    "sumWeights": 120000.0, 
+    "kFactor": 1.0
+  }, 
+  "364684": {
+    "XSection_pb": 0.20582, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.015963, 
+    "sumWeights": 120002.66371273994, 
+    "kFactor": 1.0
+  }, 
+  "364685": {
+    "XSection_pb": 0.035684, 
+    "nEvents": 20000, 
+    "genFilterEff": 0.0033036, 
+    "sumWeights": 20000.066795945168, 
+    "kFactor": 1.0
+  }, 
+  "364686": {
+    "XSection_pb": 21406000000.0, 
+    "nEvents": 160000, 
+    "genFilterEff": 0.0014129, 
+    "sumWeights": 5080716.003802657, 
+    "kFactor": 1.0
+  }, 
+  "364687": {
+    "XSection_pb": 89314000.0, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0051181, 
+    "sumWeights": 3286074.2316612005, 
+    "kFactor": 1.0
+  }, 
+  "364688": {
+    "XSection_pb": 9275000.0, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0005641, 
+    "sumWeights": 4384808.483855963, 
+    "kFactor": 1.0
+  }, 
+  "364689": {
+    "XSection_pb": 55101.0, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0014985, 
+    "sumWeights": 3065849.6995557547, 
+    "kFactor": 1.0
+  }, 
+  "364690": {
+    "XSection_pb": 1631.2, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.024259, 
+    "sumWeights": 120000.25337970257, 
+    "kFactor": 1.0
+  }, 
+  "364691": {
+    "XSection_pb": 128.41, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.010844, 
+    "sumWeights": 120000.0, 
+    "kFactor": 1.0
+  }, 
+  "364692": {
+    "XSection_pb": 27.211, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0036264, 
+    "sumWeights": 120000.0, 
+    "kFactor": 1.0
+  }, 
+  "364693": {
+    "XSection_pb": 0.20584, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.016003, 
+    "sumWeights": 120005.68194687366, 
+    "kFactor": 1.0
+  }, 
+  "364694": {
+    "XSection_pb": 0.035683, 
+    "nEvents": 120000, 
+    "genFilterEff": 0.0033126, 
+    "sumWeights": 120000.38300478458, 
+    "kFactor": 1.0
+  }, 
+  "364700": {
+    "XSection_pb": 78420000000.0, 
+    "nEvents": 450000, 
+    "genFilterEff": 0.97557, 
+    "sumWeights": 450000.0, 
+    "kFactor": 1.0
+  }, 
+  "364701": {
+    "XSection_pb": 78420000000.0, 
+    "nEvents": 440000, 
+    "genFilterEff": 0.024162, 
+    "sumWeights": 440000.0, 
+    "kFactor": 1.0
+  }, 
+  "364702": {
+    "XSection_pb": 2432800000.0, 
+    "nEvents": 410000, 
+    "genFilterEff": 0.0098225, 
+    "sumWeights": 151.1152745216136, 
+    "kFactor": 1.0
+  }, 
+  "364703": {
+    "XSection_pb": 26452000.0, 
+    "nEvents": 3310000, 
+    "genFilterEff": 0.011653, 
+    "sumWeights": 24.124114769654568, 
+    "kFactor": 1.0
+  }, 
+  "364704": {
+    "XSection_pb": 254610.0, 
+    "nEvents": 2980000, 
+    "genFilterEff": 0.013358, 
+    "sumWeights": 0.664405132055414, 
+    "kFactor": 1.0
+  }, 
+  "364705": {
+    "XSection_pb": 4553.5, 
+    "nEvents": 1300000, 
+    "genFilterEff": 0.014513, 
+    "sumWeights": 0.021711071504255608, 
+    "kFactor": 1.0
+  }, 
+  "364706": {
+    "XSection_pb": 257.56, 
+    "nEvents": 200000, 
+    "genFilterEff": 0.0094451, 
+    "sumWeights": 0.0005569217145566935, 
+    "kFactor": 1.0
+  }, 
+  "364707": {
+    "XSection_pb": 16.214, 
+    "nEvents": 100000, 
+    "genFilterEff": 0.011092, 
+    "sumWeights": 7.647190915207464e-05, 
+    "kFactor": 1.0
+  }, 
+  "364708": {
+    "XSection_pb": 0.6254500000000001, 
+    "nEvents": 100000, 
+    "genFilterEff": 0.010228, 
+    "sumWeights": 2.2289720308783095e-05, 
+    "kFactor": 1.0
+  }, 
+  "364709": {
+    "XSection_pb": 0.019619, 
+    "nEvents": 50000, 
+    "genFilterEff": 0.012308, 
+    "sumWeights": 4.284172977649797e-06, 
+    "kFactor": 1.0
+  }, 
+  "364710": {
+    "XSection_pb": 0.0011964999999999999, 
+    "nEvents": 20000, 
+    "genFilterEff": 0.0058854, 
+    "sumWeights": 8.032928132152561e-07, 
+    "kFactor": 1.0
+  }, 
+  "364711": {
+    "XSection_pb": 4.2246e-05, 
+    "nEvents": 20000, 
+    "genFilterEff": 0.0026517, 
+    "sumWeights": 4.2650239492989656e-07, 
+    "kFactor": 1.0
+  }, 
+  "364712": {
+    "XSection_pb": 1.0366e-06, 
+    "nEvents": 20000, 
+    "genFilterEff": 0.00042964, 
+    "sumWeights": 2.466817687713993e-07, 
+    "kFactor": 1.0
+  }, 
+  "600624": {
+    "XSection_pb": 541060000000.0, 
+    "nEvents": 320000, 
+    "genFilterEff": 0.0045184, 
+    "sumWeights": 822345340667980.0, 
+    "kFactor": 1.0
+  }, 
+  "600625": {
+    "XSection_pb": 55822000000.0, 
+    "nEvents": 1130000, 
+    "genFilterEff": 0.00036883, 
+    "sumWeights": 34984898258893.0, 
+    "kFactor": 1.0
+  }, 
+  "600626": {
+    "XSection_pb": 1868900000.0, 
+    "nEvents": 1260000, 
+    "genFilterEff": 0.00013383, 
+    "sumWeights": 607411202988.9116, 
+    "kFactor": 1.0
+  }, 
+  "600627": {
+    "XSection_pb": 171430000.0, 
+    "nEvents": 3090000, 
+    "genFilterEff": 1.6146e-05, 
+    "sumWeights": 27880082359.951538, 
+    "kFactor": 1.0
+  }, 
+  "600628": {
+    "XSection_pb": 5182700.0, 
+    "nEvents": 960000, 
+    "genFilterEff": 1.002e-05, 
+    "sumWeights": 279808865.704978, 
+    "kFactor": 1.0
+  }, 
+  "600629": {
+    "XSection_pb": 277370.0, 
+    "nEvents": 400000, 
+    "genFilterEff": 6.7286e-06, 
+    "sumWeights": 8915552.627742112, 
+    "kFactor": 1.0
+  }, 
+  "600630": {
+    "XSection_pb": 26527.0, 
+    "nEvents": 240000, 
+    "genFilterEff": 5.1581e-06, 
+    "sumWeights": 707903.7768009156, 
+    "kFactor": 1.0
+  }, 
+  "600631": {
+    "XSection_pb": 76.882, 
+    "nEvents": 110000, 
+    "genFilterEff": 6.4484e-05, 
+    "sumWeights": 24125.98437771201, 
+    "kFactor": 1.0
+  }, 
+  "801859": {
+    "XSection_pb": 8845200.0, 
+    "nEvents": 710000, 
+    "genFilterEff": 1.0, 
+    "sumWeights": 710000.0, 
+    "kFactor": 1.0
+  }, 
+  "426349": {
+    "XSection_pb": 0.0, 
+    "nEvents": 110000, 
+    "genFilterEff": 0.0, 
+    "sumWeights": 110000.0, 
+    "kFactor": 0.0
+  }, 
+  "801661": {
+    "XSection_pb": 294530000.0, 
+    "nEvents": 690000, 
+    "genFilterEff": 1.0, 
+    "sumWeights": 690000.0, 
+    "kFactor": 1.0
+  }, 
+  "364902": {
+    "XSection_pb": 3396100000.0, 
+    "nEvents": 140000, 
+    "genFilterEff": 0.0044714, 
+    "sumWeights": 409.7054006540602, 
+    "kFactor": 1.0
+  }, 
+  "364903": {
+    "XSection_pb": 36974000.0, 
+    "nEvents": 260000, 
+    "genFilterEff": 0.0055708, 
+    "sumWeights": 19.54829668750436, 
+    "kFactor": 1.0
+  }, 
+  "364904": {
+    "XSection_pb": 353410.0, 
+    "nEvents": 380000, 
+    "genFilterEff": 0.0069756, 
+    "sumWeights": 1.0281692986950288, 
+    "kFactor": 1.0
+  }, 
+  "364905": {
+    "XSection_pb": 6033.7, 
+    "nEvents": 380000, 
+    "genFilterEff": 0.0079811, 
+    "sumWeights": 0.07533525510931005, 
+    "kFactor": 1.0
+  }, 
+  "364906": {
+    "XSection_pb": 322.49, 
+    "nEvents": 144000, 
+    "genFilterEff": 0.0054878, 
+    "sumWeights": 0.004763684206146035, 
+    "kFactor": 1.0
+  }, 
+  "364907": {
+    "XSection_pb": 19.16, 
+    "nEvents": 60000, 
+    "genFilterEff": 0.0068288, 
+    "sumWeights": 0.0004891307327146155, 
+    "kFactor": 1.0
+  }, 
+  "364908": {
+    "XSection_pb": 0.70035, 
+    "nEvents": 40000, 
+    "genFilterEff": 0.0066413, 
+    "sumWeights": 9.542566452203083e-05, 
+    "kFactor": 1.0
+  }, 
+  "364909": {
+    "XSection_pb": 0.021235, 
+    "nEvents": 40000, 
+    "genFilterEff": 0.0082273, 
+    "sumWeights": 3.404197327001868e-05, 
+    "kFactor": 1.0
+  }, 
+  "426350": {
+    "XSection_pb": 0.0, 
+    "nEvents": 110000, 
+    "genFilterEff": 0.0, 
+    "sumWeights": 110000.0, 
+    "kFactor": 0.0
+  }, 
+  "426351": {
+    "XSection_pb": 6.398e-24, 
+    "nEvents": 82000, 
+    "genFilterEff": 1.0, 
+    "sumWeights": 82000.0, 
+    "kFactor": 1.0
+  }, 
+  "364922": {
+    "XSection_pb": 3465700000.0, 
+    "nEvents": 150000, 
+    "genFilterEff": 0.0052691, 
+    "sumWeights": 282.3908096578998, 
+    "kFactor": 1.0
+  }, 
+  "364923": {
+    "XSection_pb": 37009000.0, 
+    "nEvents": 270000, 
+    "genFilterEff": 0.0060371, 
+    "sumWeights": 12.378131998405024, 
+    "kFactor": 1.0
+  }, 
+  "364924": {
+    "XSection_pb": 353640.0, 
+    "nEvents": 380000, 
+    "genFilterEff": 0.0073993, 
+    "sumWeights": 0.627052304050892, 
+    "kFactor": 1.0
+  }, 
+  "364925": {
+    "XSection_pb": 6033.8, 
+    "nEvents": 380000, 
+    "genFilterEff": 0.0084098, 
+    "sumWeights": 0.0432308192575066, 
+    "kFactor": 1.0
+  }, 
+  "364926": {
+    "XSection_pb": 322.47999999999996, 
+    "nEvents": 140000, 
+    "genFilterEff": 0.0057036, 
+    "sumWeights": 0.002686529463888032, 
+    "kFactor": 1.0
+  }, 
+  "364927": {
+    "XSection_pb": 19.15, 
+    "nEvents": 60000, 
+    "genFilterEff": 0.0070481, 
+    "sumWeights": 0.00031234392986856374, 
+    "kFactor": 1.0
+  }
+}
